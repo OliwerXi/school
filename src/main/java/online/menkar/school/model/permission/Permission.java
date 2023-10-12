@@ -30,10 +30,10 @@ public enum Permission implements Flagged {
   /**
    * This class handles the attribute conversion of a set of permissions from and to respective flags.
    */
-  public static final class Converter implements AttributeConverter<Set<Permission>, Integer> {
+  public static final class Converter implements AttributeConverter<Set<Permission>, Long> {
     @Override
-    public Integer convertToDatabaseColumn(Set<Permission> attribute) {
-      int flags = 0;
+    public Long convertToDatabaseColumn(Set<Permission> attribute) {
+      long flags = 0;
       if (attribute == null)
         return flags;
 
@@ -46,7 +46,7 @@ public enum Permission implements Flagged {
     }
 
     @Override
-    public Set<Permission> convertToEntityAttribute(Integer dbData) {
+    public Set<Permission> convertToEntityAttribute(Long dbData) {
       final var permissions = EnumSet.noneOf(Permission.class);
       if (dbData == null)
         return permissions;
