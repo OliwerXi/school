@@ -2,9 +2,6 @@ package online.menkar.school.shared;
 
 import jakarta.persistence.*;
 import online.menkar.school.model.Department;
-import org.hibernate.annotations.CreationTimestamp;
-
-import java.time.LocalDateTime;
 
 import static jakarta.persistence.AccessType.FIELD;
 
@@ -13,16 +10,11 @@ import static jakarta.persistence.AccessType.FIELD;
  */
 @MappedSuperclass
 @Access(FIELD)
-public class AutoIncrementalIdentity {
+public class AutoIncrementalIdentity extends DatedEntity {
   // identifier of this object
   @Id
   @GeneratedValue
   private int id;
-
-  // date and time of when the object was created
-  @Column(nullable = false)
-  @CreationTimestamp
-  private LocalDateTime createdAt;
 
   /**
    * Mere accessibility declaration.
@@ -36,15 +28,6 @@ public class AutoIncrementalIdentity {
    */
   public int id() {
     return this.id;
-  }
-
-  /**
-   * Get the time of when the respective object was created at.
-   *
-   * @return {@link LocalDateTime}
-   */
-  public LocalDateTime createdAt() {
-    return this.createdAt;
   }
 
   /**
